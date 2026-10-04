@@ -151,6 +151,8 @@ Perda de registro torna a evidência incompleta, mesmo que a leitura de sensores
 
 ## Demonstração e entrega
 
+[Vídeo da entrega no YouTube](https://youtu.be/HtlurgMkMcI).
+
 [Demonstracao_Forzy.webm](media/Demonstracao_Forzy.webm) está no repositório: gravação automatizada,
 com legendas, das telas de leitura, histórico, observabilidade e erro 404. Não é apresentação oral do grupo.
 Se preferir, gravem uma apresentação usando ROTEIRO_VIDEO.md.
@@ -171,6 +173,7 @@ O relatório declara assistência de IA, inclusive na conclusão, que não cumpr
 
 - [Relatório editável em Word](docs/Relatorio_Governanca_Forzy.docx)
 - [Relatório em PDF](docs/Relatorio_Governanca_Forzy.pdf)
-- [Vídeo demonstrativo](media/Demonstracao_Forzy.webm)
+- [Vídeo da entrega no YouTube](https://youtu.be/HtlurgMkMcI)
+- [Gravação demonstrativa local](media/Demonstracao_Forzy.webm)
 
 O sumário do Word é um campo atualizável. Confira a paginação antes de entregar; o PDF possui paginação conferida.
