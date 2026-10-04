@@ -1,0 +1,209 @@
+{
+  "items": [
+    {
+      "id": 5,
+      "request_id": "c39314e1-58d5-45e4-8dfb-47c237f27f08",
+      "timestamp": "2026-10-02T19:33:44.366499+00:00",
+      "session_id": "validacao-http",
+      "feature": "funcionalidade_errada",
+      "context_bounds_valid": true,
+      "method": "GET",
+      "path": "/v1/sensores/TEMP-001/leitura-atual",
+      "status_code": 200,
+      "freshness_seconds": 6.367045,
+      "records_count": 1,
+      "latency_ms": 1.419
+    },
+    {
+      "id": 4,
+      "request_id": "4bb69231-4d90-411c-8e1b-4befa5831bf5",
+      "timestamp": "2026-10-02T19:33:44.316602+00:00",
+      "session_id": "",
+      "feature": "",
+      "context_bounds_valid": true,
+      "method": "GET",
+      "path": "/v1/sensores/TEMP-001/leitura-atual",
+      "status_code": 200,
+      "freshness_seconds": 6.317583,
+      "records_count": 1,
+      "latency_ms": 2.156
+    },
+    {
+      "id": 3,
+      "request_id": "97dbaa7c-be63-44ba-ab37-b0d2639bddd8",
+      "timestamp": "2026-10-02T19:33:44.271379+00:00",
+      "session_id": "validacao-http",
+      "feature": "historico",
+      "context_bounds_valid": true,
+      "method": "GET",
+      "path": "/v1/sensores/TEMP-001/historico",
+      "status_code": 422,
+      "freshness_seconds": null,
+      "records_count": null,
+      "latency_ms": 2.658
+    },
+    {
+      "id": 2,
+      "request_id": "2b0b7d52-2add-4d5f-b128-96c30573d721",
+      "timestamp": "2026-10-02T19:33:44.225576+00:00",
+      "session_id": "validacao-http",
+      "feature": "leitura_atual",
+      "context_bounds_valid": true,
+      "method": "GET",
+      "path": "/v1/sensores/INVALIDO/leitura-atual",
+      "status_code": 404,
+      "freshness_seconds": null,
+      "records_count": null,
+      "latency_ms": 3.401
+    },
+    {
+      "id": 1,
+      "request_id": "e4acc1e6-7dae-4755-b43d-27a23bc047c8",
+      "timestamp": "2026-10-02T19:33:44.161685+00:00",
+      "session_id": "",
+      "feature": "",
+      "context_bounds_valid": true,
+      "method": "GET",
+      "path": "/openapi.json",
+      "status_code": 200,
+      "freshness_seconds": null,
+      "records_count": null,
+      "latency_ms": 10.44
+    }
+  ],
+  "count": 5,
+  "metrics": {
+    "sensor_requests": 4,
+    "success_responses": 2,
+    "valid_freshness_responses": 2,
+    "latency_p50_ms": 2.156,
+    "latency_p95_ms": 3.401,
+    "error_rate_percent": 50.0,
+    "client_error_rate_percent": 50.0,
+    "server_error_rate_percent": 0.0,
+    "context_completeness_percent": 75.0,
+    "context_validity_percent": 50.0,
+    "freshness_completeness_percent": 100.0,
+    "future_timestamp_count": 0,
+    "fresh_within_120s_percent": 100.0,
+    "freshness_p95_seconds": 6.367045,
+    "minimum_sample_met": false,
+    "by_route": {
+      "/v1/sensores/{tag}/historico": {
+        "sensor_requests": 1,
+        "success_responses": 0,
+        "valid_freshness_responses": 0,
+        "latency_p50_ms": 2.658,
+        "latency_p95_ms": 2.658,
+        "error_rate_percent": 100.0,
+        "client_error_rate_percent": 100.0,
+        "server_error_rate_percent": 0.0,
+        "context_completeness_percent": 100.0,
+        "context_validity_percent": 100.0,
+        "freshness_completeness_percent": null,
+        "future_timestamp_count": 0,
+        "fresh_within_120s_percent": null,
+        "freshness_p95_seconds": null,
+        "minimum_sample_met": false
+      },
+      "/v1/sensores/{tag}/leitura-atual": {
+        "sensor_requests": 3,
+        "success_responses": 2,
+        "valid_freshness_responses": 2,
+        "latency_p50_ms": 2.156,
+        "latency_p95_ms": 3.401,
+        "error_rate_percent": 33.333,
+        "client_error_rate_percent": 33.333,
+        "server_error_rate_percent": 0.0,
+        "context_completeness_percent": 66.667,
+        "context_validity_percent": 33.333,
+        "freshness_completeness_percent": 100.0,
+        "future_timestamp_count": 0,
+        "fresh_within_120s_percent": 100.0,
+        "freshness_p95_seconds": 6.367045,
+        "minimum_sample_met": false
+      }
+    },
+    "evaluations": [
+      {
+        "indicator": "Latencia P95",
+        "metric": "latency_p95_ms",
+        "value": 3.401,
+        "target": 500,
+        "operator": "<=",
+        "status": "atendido_na_amostra",
+        "action": "Backend: investigar I/O, provider e volume do historico.",
+        "sufficient_sample": false
+      },
+      {
+        "indicator": "Erros HTTP",
+        "metric": "error_rate_percent",
+        "value": 50.0,
+        "target": 1,
+        "operator": "<=",
+        "status": "violado_na_amostra",
+        "action": "Separar 4xx do cliente e 5xx do backend; investigar responsavel.",
+        "sufficient_sample": false
+      },
+      {
+        "indicator": "Completude de contexto",
+        "metric": "context_completeness_percent",
+        "value": 75.0,
+        "target": 100,
+        "operator": ">=",
+        "status": "violado_na_amostra",
+        "action": "Front-end: corrigir envio dos dois headers.",
+        "sufficient_sample": false
+      },
+      {
+        "indicator": "Validade do contexto",
+        "metric": "context_validity_percent",
+        "value": 50.0,
+        "target": 100,
+        "operator": ">=",
+        "status": "violado_na_amostra",
+        "action": "Front-end: conferir funcionalidade e limites dos headers.",
+        "sufficient_sample": false
+      },
+      {
+        "indicator": "Completude de freshness",
+        "metric": "freshness_completeness_percent",
+        "value": 100.0,
+        "target": 100,
+        "operator": ">=",
+        "status": "atendido_na_amostra",
+        "action": "Provider: verificar timestamp e sincronizacao dos relogios.",
+        "sufficient_sample": false
+      },
+      {
+        "indicator": "Atualidade",
+        "metric": "fresh_within_120s_percent",
+        "value": 100.0,
+        "target": 95,
+        "operator": ">=",
+        "status": "atendido_na_amostra",
+        "action": "Provider: verificar atraso na aquisicao; sinalizar dado antigo.",
+        "sufficient_sample": false
+      }
+    ],
+    "window_minutes": 15,
+    "window_evaluated_at": "2026-10-02T19:33:44.390298+00:00",
+    "scope": "Chamadas de sensores na janela temporal e dentro da amostra retornada; limite pode truncar janela."
+  },
+  "sample_limit": 10000,
+  "possibly_truncated": false,
+  "logging_health": {
+    "persistence_failures_since_process_start": 0
+  },
+  "note": "A chamada atual aparece na proxima consulta. Falhas de persistencia sao contadas apenas desde o inicio do processo.",
+  "validation": {
+    "method": "requests sobre HTTP local com Uvicorn",
+    "provider": "simulacao",
+    "scenario": "falhas_induzidas",
+    "expected_sensor_calls": 4,
+    "python": "3.12.14",
+    "concurrency": 1,
+    "history_limit": 30,
+    "limitation": "Execucao local sem carga concorrente ou aquisicao fisica Forzy."
+  }
+}

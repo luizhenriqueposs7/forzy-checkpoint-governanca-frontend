@@ -1,0 +1,82 @@
+{
+  "version": "2.0.0",
+  "scope": "leitura-atual e historico de sensores",
+  "default_window_minutes": 15,
+  "minimum_sample_per_route": 100,
+  "sample_limit": 10000,
+  "source": "METAS PROPOSTAS PELO PROJETO; NAO SAO MEDICOES DE SENSORES FISICOS",
+  "fields": [
+    "request_id",
+    "timestamp",
+    "session_id",
+    "feature",
+    "context_bounds_valid",
+    "method",
+    "path",
+    "status_code",
+    "latency_ms",
+    "freshness_seconds",
+    "records_count"
+  ],
+  "metrics": [
+    {
+      "name": "latency_p95_ms",
+      "formula": "nearest rank: valor ordenado na posicao ceil(0.95*n)",
+      "target": "<=500 ms",
+      "owner": "backend",
+      "chart": "linha por minuto e tabela por rota"
+    },
+    {
+      "name": "error_rate_percent",
+      "formula": "100 * status>=400 / chamadas de sensores",
+      "target": "<=1% em trafego normal",
+      "owner": "backend e frontend",
+      "chart": "barras de 4xx e 5xx por rota"
+    },
+    {
+      "name": "context_completeness_percent",
+      "formula": "100 * sessao e feature nao vazias apos strip / chamadas",
+      "target": "100%",
+      "owner": "frontend",
+      "chart": "cartao e linha por minuto"
+    },
+    {
+      "name": "context_validity_percent",
+      "formula": "100 * sessao valida, feature correspondente e limites respeitados / chamadas",
+      "target": "100%",
+      "owner": "frontend",
+      "chart": "tabela de resultados do contrato"
+    },
+    {
+      "name": "freshness_completeness_percent",
+      "formula": "100 * respostas 200 com idade finita e nao negativa / respostas 200",
+      "target": "100%",
+      "owner": "provider",
+      "chart": "cartao e linha por minuto"
+    },
+    {
+      "name": "fresh_within_120s_percent",
+      "formula": "100 * idades validas <=120 s / idades validas",
+      "target": ">=95% e P95 da idade<=120 s",
+      "owner": "provider",
+      "chart": "cartao e linha do P95 de idade"
+    },
+    {
+      "name": "record_completeness_percent",
+      "formula": "100 * eventos persistidos / chamadas emitidas no roteiro externo",
+      "target": "100%",
+      "owner": "responsavel pela evidencia",
+      "chart": "comparacao de emitidos e persistidos",
+      "implementation": "verificacao externa; nao deduzido do proprio log"
+    }
+  ],
+  "limitations": [
+    "Sem autenticação",
+    "Sensores simulados por padrão",
+    "Janela pode ser truncada pelo limite",
+    "Contador de falha de persistencia reinicia com o processo",
+    "Sem sonda de disponibilidade ou alerta em segundo plano"
+  ],
+  "missing_denominator": "null",
+  "response_procedure": "Identificar indicador e request_ids; registrar responsavel e hipotese; corrigir; repetir coleta comparavel; documentar recuperacao."
+}
