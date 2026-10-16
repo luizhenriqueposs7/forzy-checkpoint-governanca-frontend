@@ -75,27 +75,6 @@ Se o banco falhar, a leitura pode continuar disponível, mas o status de observa
 será unavailable e a interface sinalizará a perda. O contador de falhas vale apenas desde o início do processo.
 Se a leitura do repositório de logs falhar, observabilidade retorna 503.
 
-## Metric Contract
-
-Contrato detalhado: METRIC_CONTRACT.json e relatório de governança.
-
-- Latência: P50 e P95 nearest rank, em ms; meta inicial P95 <= 500 ms.
-- Erros HTTP: percentual de status >= 400; meta inicial <= 1%; 4xx e 5xx separados.
-- Contexto completo e válido: metas 100%; validade compara funcionalidade e limites.
-- Freshness completa: respostas 200 com idade finita e não negativa / respostas 200; meta 100%.
-- Atualidade: idade <= 120 s / idades válidas; meta >= 95%; monitorar P95 da idade.
-- Completude de registro: contagem externa versus eventos persistidos; meta 100%, verificada pelo roteiro.
-
-Janela padrão: 15 minutos. Limite de até 10 mil eventos pode truncar a janela;
-possibly_truncated sinaliza esse risco. Métricas excluem consultas de observabilidade.
-Sem denominador, taxas são null. Há resultados agregados e por rota.
-O mínimo didático de 100 chamadas não comprova representatividade ou SLA de produção.
-Metas são propostas do projeto; fontes conceituais não prescrevem esses valores numéricos.
-
-Latência interna exclui persistência e transporte. O roteiro mede também ida e volta no cliente.
-Freshness usa o timestamp de aquisição, não o horário em que o cliente consultou a API.
-Timestamp futuro é uma falha temporal; valor não finito ou timestamp sem fuso viola o esquema e gera 502.
-
 ## Baseline e evidências
 
 Evidências de HTTP local com requests e Uvicorn, sem aquisição física e com concorrência 1:
@@ -140,15 +119,6 @@ SENSOR_PROVIDER inválido impede a inicialização, em vez de retornar silencios
 Para ensaiar dados antigos no provider padrão, defina SENSOR_SIMULATION_AGE_SECONDS=300 antes de iniciar a API.
 API_URL configura o destino do frontend; OBS_DB configura o arquivo de persistência.
 
-## Governança e limites
-
-Não há autenticação, conforme o escopo. A sessão não comprova identidade pessoal.
-Execute localmente. Não registre nomes, RM, IP, cookies, tokens ou informações pessoais nos headers.
-Logs persistem após reinício. Há proposta de limpeza controlada após avaliação; não há retenção automática.
-Os gráficos avaliam as consultas recebidas e não detectam sozinhos intervalos de indisponibilidade.
-Alertas são exibidos na consulta; não há notificação em segundo plano.
-Perda de registro torna a evidência incompleta, mesmo que a leitura de sensores funcione.
-
 ## Demonstração e entrega
 
 [Vídeo da entrega no YouTube](https://youtu.be/HtlurgMkMcI).
@@ -157,23 +127,8 @@ Perda de registro torna a evidência incompleta, mesmo que a leitura de sensores
 com legendas, das telas de leitura, histórico, observabilidade e erro 404. Não é apresentação oral do grupo.
 Se preferir, gravem uma apresentação usando ROTEIRO_VIDEO.md.
 
-Para Front-end, envie o link deste repositório no Teams da disciplina junto da demonstração.
-Não publique .venv/, work/, data/ ou logs pessoais. O código, o relatório e o vídeo estão disponíveis nas pastas deste repositório.
-Prazo de Governança informado: 14/10/2026. Prazo de Front-end: confirmar com professor Lucas.
-O relatório declara assistência de IA, inclusive na conclusão, que não cumpre a condição de escrita sem IA do enunciado.
-
-## Fontes conceituais
-
-- https://opentelemetry.io/docs/concepts/observability-primer/
-- https://sre.google/workbook/implementing-slos/
-- https://fastapi.tiangolo.com/tutorial/middleware/
-- https://docs.streamlit.io/develop/api-reference/caching-and-state/st.session_state
-
-## Relatório e vídeo
 
 - [Relatório editável em Word](docs/Relatorio_Governanca_Forzy.docx)
 - [Relatório em PDF](docs/Relatorio_Governanca_Forzy.pdf)
 - [Vídeo da entrega no YouTube](https://youtu.be/HtlurgMkMcI)
 - [Gravação demonstrativa local](media/Demonstracao_Forzy.webm)
-
-O sumário do Word é um campo atualizável. Confira a paginação antes de entregar; o PDF possui paginação conferida.
