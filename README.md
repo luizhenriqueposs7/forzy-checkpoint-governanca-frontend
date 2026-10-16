@@ -123,9 +123,7 @@ API_URL configura o destino do frontend; OBS_DB configura o arquivo de persistê
 
 [Vídeo da entrega no YouTube](https://youtu.be/HtlurgMkMcI).
 
-[Demonstracao_Forzy.webm](media/Demonstracao_Forzy.webm) está no repositório: gravação automatizada,
-com legendas, das telas de leitura, histórico, observabilidade e erro 404. Não é apresentação oral do grupo.
-Se preferir, gravem uma apresentação usando ROTEIRO_VIDEO.md.
+[Demonstracao_Forzy.webm](media/Demonstracao_Forzy.webm) 
 
 
 - [Relatório editável em Word](docs/Relatorio_Governanca_Forzy.docx)
